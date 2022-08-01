@@ -139,7 +139,7 @@ listDogName.forEach((item, index) => {
   return secondselectDogList.appendChild(option)
 })
 
-let options = ['popularity', 'intelligence', 'temperament']
+let options = ['popularity', 'intelligence']
 
 options.forEach((item, index) => {
   let option = document.createElement('option')
