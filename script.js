@@ -201,7 +201,7 @@ let compare = () => {
       } else {
         document
           .getElementById('statement')
-          .append(breed + `is more popular than ` + secondDog.breed)
+          .append(breed + ` is more popular than ` + secondDog.breed)
       }
     } else {
       if (intelligence > secondDog.intelligence) {
