@@ -139,7 +139,7 @@ listDogName.forEach((item, index) => {
   return secondselectDogList.appendChild(option)
 })
 
-let options = ['popularity', 'intelligence']
+let options = ['popularity', 'intelligence', 'temperament']
 
 options.forEach((item, index) => {
   let option = document.createElement('option')
@@ -237,40 +237,6 @@ console.log(listDogName)
 //         .append(breed + `is more popular than ` + secondDog.breed)
 //     }
 //   }
-
-//   if (intelligence > secondDog.intelligence) {
-//     document
-//       .getElementById('statement')
-//       .append(secondDog.breed + ` is more intelligent than ` + breed)
-//   } else {
-//     document
-//       .getElementById('statement')
-//       .append(breed + `is more intelligent than ` + secondDog.breed)
-//   }
-// }
-
-//  if(selectedDogIndex==selectedDogIndex2){
-//     alert('selected dogs cannot be the same')
-//     }else{
-//    if(traitSelected=='popularity'){
-//      return popularityRank()
-//    }elseif(traitSelected=='intelligence'){
-//      return intelligenceRank()
-//    }
-//     }
-// function popularityRank(){
-//         if(popularity>secondDog.popularity){
-//       document.getElementById('statement').append(secondDog.breed + ` is more popular than `+ breed)
-//      }else{document.getElementById('statement').append(breed + `is more popular than `+ secondDog.breed)}}
-// }
-
-// function intelligenceRank(){
-//        if(intelligence>secondDog.intelligence){
-//      document.getElementById('statement').append(secondDog.breed + ` is more intelligent than `+ breed)
-//          }else{
-//      document.getElementById('statement').append(breed + `is more intelligent than `+ secondDog.breed)}
-//     }
-// }
 
 //   for(let i=0; i<temperament.length; i++){
 //     document.getElementById('dog1temperament').append(`${temperament[i]} `)
