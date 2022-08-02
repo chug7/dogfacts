@@ -122,6 +122,7 @@ data.forEach((item) => {
 let firstselectDogList = document.getElementById('firstDogList')
 let secondselectDogList = document.getElementById('secondDogList')
 let traitsDropdown = document.getElementById('infoList')
+let filterDropdown = document.getElementById('filter')
 
 //add drop down for dog breeds:
 
@@ -136,7 +137,7 @@ listDogName.forEach((item, index) => {
   let option = document.createElement('option')
   option.value = listDogName[index]
   option.text = listDogName[index]
-  return secondselectDogList.appendChild(option)
+  secondselectDogList.appendChild(option)
 })
 
 let options = ['popularity', 'intelligence']
@@ -146,6 +147,13 @@ options.forEach((item, index) => {
   option.value = options[index]
   option.text = options[index]
   return traitsDropdown.appendChild(option)
+})
+
+options.forEach((item, index) => {
+  let option = document.createElement('option')
+  option.value = options[index]
+  option.text = options[index]
+  return filterDropdown.appendChild(option)
 })
 //add drop down for dog information:
 
@@ -190,37 +198,82 @@ let compare = () => {
   let select3 = document.getElementById('infoList')
   let traitSelected = select3.selectedIndex
 
+  function addImg(dog) {
+    var image = new Image()
+    image.src =
+      `<img src="` + dog + `.jpg"` + ` style="width:250px;height:250px;">`
+    const insert = document.getElementsByClassName('firstDog')
+    insert.appendChild(image)
+  }
+
+  // <div class ="firstDog"></div> higher ranked dog here
+  // <div class="secondDog"></div>
+
   if (selectedDogIndex == selectedDogIndex2) {
     alert('selected dogs cannot be the same')
   } else {
     if (traitSelected == 0) {
       if (popularity > secondDog.popularity) {
+        let morePopulardog = secondDog.breed
         document
           .getElementById('statement')
-          .append(secondDog.breed + ` is more popular than ` + breed)
+          .append(
+            `The ` + morePopulardog + ` is more popular than the ` + breed,
+          )
       } else {
+        let morePopulardog = breed
         document
           .getElementById('statement')
-          .append(breed + ` is more popular than ` + secondDog.breed)
+          .append(
+            `The ` +
+              morePopulardog +
+              ` is more popular than the ` +
+              secondDog.breed,
+          )
+        addImg(morePopulardog)
       }
     } else {
       if (intelligence > secondDog.intelligence) {
+        let moreIntelligentdog = secondDog.breed
         document
           .getElementById('statement')
-          .append(secondDog.breed + ` is more intelligent than ` + breed)
+          .append(
+            `The ` + secondDog.breed + ` is more intelligent than the ` + breed,
+          )
       } else {
+        let moreIntelligentdog = breed
         document
           .getElementById('statement')
-          .append(breed + ` is more intelligent than ` + secondDog.breed)
+          .append(
+            `The ` + breed + ` is more intelligent than the ` + secondDog.breed,
+          )
+        addImg(moreIntelligentdog)
       }
     }
   }
 }
 
-console.log(firstDog)
-console.log(secondDog)
-console.log(traitSelected)
-console.log(listDogName)
+let showAll = () => {
+  var thing = document.getElementById('showAll')
+  //Dog images:
+  listDogName.forEach((item, index) => {
+    let imageElement = document.createElement('img')
+    let imageFile = listDogName[index].jpg
+    let imageGrid = document.getElementById('showAllDogs')
+
+    //    image2:
+    //   var img2 = document.createElement("img");
+    //   img2.src= secondDog.photo
+    //   var block2 = document.getElementById("dog2photo");
+    //   block2.appendChild(img2);
+  })
+
+  if (thing.style.visibility == 'visible') {
+    thing.style.visibility = 'hidden'
+  } else {
+    thing.style.visibility = 'visible'
+  }
+}
 
 // let Compare = () => {
 //   document.getElementById('statement').innerHTML = ''
@@ -240,14 +293,4 @@ console.log(listDogName)
 
 //   for(let i=0; i<temperament.length; i++){
 //     document.getElementById('dog1temperament').append(`${temperament[i]} `)
-//   }
-
-//    image2:
-//   var img2 = document.createElement("img");
-//   img2.src= secondDog.photo
-//   var block2 = document.getElementById("dog2photo");
-//   block2.appendChild(img2);
-
-//   for(let i=0; i<temperament.length; i++){
-//     document.getElementById('dog2temperament').append(`${secondDog.temperament[i]}`)
 //   }
