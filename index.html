@@ -7,11 +7,7 @@
       name="description"
       content="Author: A.N. Author, Illustrator: P. Picture, Category: Books, Price:  £9.24, Length: 784 pages"
     />
-    <meta
-      name="google-site-verification"
-      content="+nxGUDJ4QpAZ5l9Bsjdi102tLVC21AIh5d1Nl23908vVuFHs34="
-    />
-    <title>Example Books - high-quality used books for children</title>
+    <title>Dog</title>
     <meta name="robots" content="noindex,nofollow" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -22,17 +18,32 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
+    <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Kadwa:wght@700&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="styles.css" />
     <title>Exercise</title>
   </head>
   <body>
     <div class="container">
+      <div class="navbar">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <img src="logo.png" alt="some logo" width="100" height="100" />
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <h1>Let's compare dogs! woof...</h1>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+        <div class="container">
+          <h1 class="display-4">Steps:</h1>
+          <p class="lead my-3 font-italic">
+            Select 2 dogs and click on Compare
+          </p>
+        </div>
+      </div>
       <div class="row">
         <div class="col-12">
           <div class="row">
-            <nav>
-              
-            </nav>
-            <span>Select your dog</span>
             <div class="col-6">
               <select class="form-select" id="firstDogList"></select>
             </div>
@@ -47,31 +58,43 @@
                 Compare
               </button>
             </div>
-              <div class="col-12">
-            </div>
           </div>
         </div>
-        
-         <div class="flex-container">
-
-        <div class = "flex-container">
-           <div>
-             <p id = statement></p>
-            </div>
-            <div id = dog2photo></div>
-        </div>      
+        </div>
+<div class="col-12">  
+  <div class="flex-container">   
+    <div class ="firstDog"></div>
+    <div class="secondDog"></div>
+    <div class="dog">
+      <p id="statement"></p></div>
+  </div>
+</div>
         <div class="col-12">
           <div class="row">
             <div class="col-12 text-left">
-              <button onclick="ShowAll()" class="btn btn-primary">
-                Show All
-              </button> 
+
+            </div>
+            <button onclick="showAll()" class="btn btn-primary">
+              Show All
+            </button>
+            <div id="showAll" style="visibility:hidden">
+              Sort by Popularity and Intelligence
+              <div class="col-12">  
+                <div class="col-12">
+                  <select class="form-select" id="filter"></select>
+                </div>
+                <div class="flex-container">   
+                  <div class ="showAllDogs">
+                    
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div id = "dog"></div>
+    <div id="dog"></div>
     <script type="text/javascript" src="script.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
