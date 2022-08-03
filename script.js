@@ -114,9 +114,26 @@ let bodyData = JSON.parse(jsonObject)
 let data = bodyData.dogBreeds
 
 let listDogName = []
-
 data.forEach((item) => {
   listDogName.push(item.breed)
+})
+
+let filterIntelligence = []
+data.forEach((item) => {
+  filterIntelligence.push([item.breed, item.intelligence])
+})
+
+let filterPopularity = []
+data.forEach((item) => {
+  filterPopularity.push([item.breed, item.popularity])
+})
+
+filterIntelligence.sort(function (a, b) {
+  return a[1] - b[1]
+})
+
+filterPopularity.sort(function (a, b) {
+  return a[1] - b[1]
 })
 
 let firstselectDogList = document.getElementById('firstDogList')
@@ -140,6 +157,8 @@ listDogName.forEach((item, index) => {
   secondselectDogList.appendChild(option)
 })
 
+//add drop down for dog information:
+
 let options = ['popularity', 'intelligence']
 
 options.forEach((item, index) => {
@@ -155,16 +174,16 @@ options.forEach((item, index) => {
   option.text = options[index]
   return filterDropdown.appendChild(option)
 })
-//add drop down for dog information:
 
 let compare = () => {
-  document.getElementById('statement').innerHTML = ''
+  document.getElementById('win').innerHTML = ''
 
+  document.getElementById('statement').innerHTML = ''
   //first selected dog object
   let select = document.getElementById('firstDogList')
   let selectedDogIndex = select.selectedIndex
   let firstDog = data[selectedDogIndex]
-
+  console.log(firstDog)
   //destructuring of first dog:
   let {
     breed,
@@ -183,31 +202,34 @@ let compare = () => {
   let secondDog = data[selectedDogIndex2]
 
   //destructuring of second dog:
-  let {
-    breed2,
-    breedType2,
-    origin2,
-    popularity2,
-    temperament2,
-    hypoallergenic2,
-    intelligence2,
-    photo2,
-  } = secondDog //doesnt work
+  // let {
+  //   breed2,
+  //   breedType2,
+  //   origin2,
+  //   popularity2,
+  //   temperament2,
+  //   hypoallergenic2,
+  //   intelligence2,
+  //   photo2,
+  // } = secondDog //doesnt work why?
 
   //trait selected
   let select3 = document.getElementById('infoList')
   let traitSelected = select3.selectedIndex
 
+  //add image of higher dog:
   function addImg(dog) {
-    var image = new Image()
-    image.src =
-      `<img src="` + dog + `.jpg"` + ` style="width:250px;height:250px;">`
-    const insert = document.getElementsByClassName('firstDog')
-    insert.appendChild(image)
+    let imageElement = document.createElement('img')
+    let imageFile = dog + '.jpg'
+    imageElement.src = imageFile
+    let imageGrid = document.getElementById('win')
+    imageGrid.append(imageElement)
   }
-
-  // <div class ="firstDog"></div> higher ranked dog here
-  // <div class="secondDog"></div>
+  //clear image
+  function clearImage() {
+    let imageGrid = document.getElementById('win')
+    imageGrid.remove()
+  }
 
   if (selectedDogIndex == selectedDogIndex2) {
     alert('selected dogs cannot be the same')
@@ -220,6 +242,7 @@ let compare = () => {
           .append(
             `The ` + morePopulardog + ` is more popular than the ` + breed,
           )
+        addImg(morePopulardog)
       } else {
         let morePopulardog = breed
         document
@@ -240,6 +263,7 @@ let compare = () => {
           .append(
             `The ` + secondDog.breed + ` is more intelligent than the ` + breed,
           )
+        addImg(moreIntelligentdog)
       } else {
         let moreIntelligentdog = breed
         document
@@ -250,6 +274,7 @@ let compare = () => {
         addImg(moreIntelligentdog)
       }
     }
+    //addImg(moreIntelligentdog)
   }
 }
 
@@ -258,38 +283,59 @@ let showAll = () => {
   //Dog images:
   listDogName.forEach((item, index) => {
     let imageElement = document.createElement('img')
-    let imageFile = listDogName[index].jpg
+    let imageFile = item + '.jpg'
+    imageElement.src = imageFile
     let imageGrid = document.getElementById('showAllDogs')
-
-    //    image2:
-    //   var img2 = document.createElement("img");
-    //   img2.src= secondDog.photo
-    //   var block2 = document.getElementById("dog2photo");
-    //   block2.appendChild(img2);
+    imageGrid.append(imageElement)
   })
 
   if (thing.style.visibility == 'visible') {
     thing.style.visibility = 'hidden'
+    document.getElementById('showAllDogs').innerHTML = ''
   } else {
     thing.style.visibility = 'visible'
   }
 }
 
-// let Compare = () => {
-//   document.getElementById('statement').innerHTML = ''
-//   if (selectedDogIndex == selectedDogIndex2) {
-//     alert('selected dogs cannot be the same')
-//   } else {
-//     if (popularity > secondDog.popularity) {
-//       document
-//         .getElementById('statement')
-//         .append(secondDog.breed + ` is more popular than ` + breed)
-//     } else {
-//       document
-//         .getElementById('statement')
-//         .append(breed + `is more popular than ` + secondDog.breed)
-//     }
-//   }
+let filter = () => {
+  //trait selected
+  let filterSelect = document.getElementById('filter')
+  let filterItem = filterSelect.selectedIndex
+
+  if (filterItem == 'popularity') {
+  } else {
+  }
+}
+
+const filterDropDown = document.getElementById('filter')
+
+filterDropDown.addEventListener('change', function handleChange(event) {
+  if (event.target.value == 'popularity') {
+    document.getElementById('showAllDogs').innerHTML = ''
+    filterPopularity.sort(function (a, b) {
+      return a[1] - b[1]
+    })
+    filterPopularity.forEach((item, index) => {
+      let imageElement = document.createElement('img')
+      let imageFile = item[0] + '.jpg'
+      imageElement.src = imageFile
+      let imageGrid = document.getElementById('showAllDogs')
+      imageGrid.append(imageElement)
+    })
+  } else {
+    document.getElementById('showAllDogs').innerHTML = ''
+    filterIntelligence.sort(function (a, b) {
+      return a[1] - b[1]
+    })
+    filterIntelligence.forEach((item, index) => {
+      let imageElement = document.createElement('img')
+      let imageFile = item[0] + '.jpg'
+      imageElement.src = imageFile
+      let imageGrid = document.getElementById('showAllDogs')
+      imageGrid.append(imageElement)
+    })
+  }
+})
 
 //   for(let i=0; i<temperament.length; i++){
 //     document.getElementById('dog1temperament').append(`${temperament[i]} `)
